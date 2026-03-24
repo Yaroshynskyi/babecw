@@ -18,6 +18,55 @@ class Games extends Model
         }
     }
 
+    // Метод для динамічної фільтрації
+    public static function filterGames($filters = [])
+    {
+        $sql = "SELECT * FROM " . self::$tableName . " WHERE 1=1";
+        $params = [];
+
+        if (!empty($filters['category_id'])) {
+            $sql .= " AND category_id = :category_id";
+            $params[':category_id'] = $filters['category_id'];
+        }
+        if (!empty($filters['min_price'])) {
+            $sql .= " AND price >= :min_price";
+            $params[':min_price'] = $filters['min_price'];
+        }
+        if (!empty($filters['max_price'])) {
+            $sql .= " AND price <= :max_price";
+            $params[':max_price'] = $filters['max_price'];
+        }
+        if (!empty($filters['manufacturer'])) {
+            $sql .= " AND manufacturer = :manufacturer";
+            $params[':manufacturer'] = $filters['manufacturer'];
+        }
+        if (!empty($filters['language'])) {
+            $sql .= " AND language = :language";
+            $params[':language'] = $filters['language'];
+        }
+        if (!empty($filters['age'])) {
+            $sql .= " AND age >= :age";
+            $params[':age'] = $filters['age'];
+        }
+
+        $sql .= " ORDER BY id DESC";
+
+        $stmt = \core\Core::get()->db->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    public static function getUniqueValues($column)
+    {
+        // Вибираємо тільки ті значення, які існують (не порожні)
+        $sql = "SELECT DISTINCT $column FROM " . self::$tableName . " WHERE $column IS NOT NULL AND $column != ''";
+        
+        // ТУТ БУЛА ПОМИЛКА: додано ->pdo-> перед query()
+        $stmt = \core\Core::get()->db->pdo->query($sql);
+        
+        return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+    }
+
     public static function FindByCategory($category_id = null, $sort_price = null, $players = null, $search_title = null)
     {
         $order_by = '';
@@ -71,7 +120,7 @@ class Games extends Model
         $this->db->update('games', $newData, ['id' => $id]);
     }
 
-    public static function addGame($title, $description, $price, $min_players, $max_players, $image, $category_id)
+  public static function addGame($title, $description, $price, $min_players, $max_players, $image, $category_id, $manufacturer, $language, $playtime, $age)
     {
         $game = new Games();
         $game->title = $title;
@@ -81,6 +130,10 @@ class Games extends Model
         $game->max_players = $max_players;
         $game->image = $image;
         $game->category_id = $category_id;
+        $game->manufacturer = $manufacturer;
+        $game->language = $language;
+        $game->playtime = $playtime;
+        $game->age = $age;
         $game->save();
     }
 

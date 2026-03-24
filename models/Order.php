@@ -1,98 +1,57 @@
 <?php
-
 namespace models;
 
-use core\Core;
 use core\Model;
-use core\Db;
-use core\Config;
+use core\Core;
 
 class Order extends Model
 {
     public static $tableName = 'orders';
 
-    public function __construct()
+    public static function createOrder($user_id, $cart_items, $name, $phone, $address)
     {
-        parent::__construct();
-    }
+        $order = new Order();
+        $order->user_id = $user_id;
+        $order->status = 'Нове';
+        $order->customer_name = $name;
+        $order->phone = $phone;
+        $order->address = $address;
+        $order->save();
+        
+        $order_id = Core::get()->db->pdo->lastInsertId();
 
-    public function createOrder($name, $email, $address, $phone, $cart)
-    {
-        try {
-            $this->db->pdo->beginTransaction();
+        $sql = "INSERT INTO order_items (order_id, game_id, quantity, price) VALUES (:order_id, :game_id, :quantity, :price)";
+        $stmt = Core::get()->db->pdo->prepare($sql);
 
-            $orderData = [
-                'name' => $name,
-                'email' => $email,
-                'address' => $address,
-                'phone' => $phone,
-                'created_at' => date('Y-m-d H:i:s')
-            ];
-            $this->db->insert('orders', $orderData);
-            $orderId = $this->db->pdo->lastInsertId();
-
-            foreach ($cart as $item) {
-                if ($item['stock_quantity'] > 0) {
-                    $orderItemData = [
-                        'order_id' => $orderId,
-                        'nuts_id' => $item['id'],
-                        'quantity' => $item['stock_quantity'],
-                        'price' => $item['price']
-                    ];
-                    $this->db->insert('order_items', $orderItemData);
-
-                    $newQuantity = $item['stock_quantity'] - 1;
-                    $this->db->update('drinks', ['stock_quantity' => $newQuantity], ['id' => $item['id']]);
-                } else {
-                    throw new \Exception('Insufficient stock for item ID: ' . $item['id']);
-                }
-            }
-
-            $this->db->pdo->commit();
-
-            return $orderId;
-        } catch (\Exception $e) {
-            $this->db->pdo->rollBack();
-            return false;
+        foreach ($cart_items as $item) {
+            $stmt->execute([
+                ':order_id' => $order_id,
+                ':game_id'  => $item['id'],
+                ':quantity' => 1,
+                ':price'    => $item['price']
+            ]);
         }
+        
+        return $order_id;
     }
 
+    public static function getOrdersByUserId($user_id)
+    {
+        $sql = "SELECT * FROM " . self::$tableName . " WHERE user_id = :user_id ORDER BY id DESC";
+        $stmt = Core::get()->db->pdo->prepare($sql);
+        $stmt->execute([':user_id' => $user_id]);
+        return $stmt->fetchAll();
+    }
 
     public static function getAllOrders()
     {
-        $rows = self::getAll(self::$tableName);
-        if (!empty($rows)) {
-            return $rows;
-        } else {
-            return null;
-        }
+        $sql = "SELECT * FROM " . self::$tableName . " ORDER BY id DESC";
+        $stmt = Core::get()->db->pdo->query($sql);
+        return $stmt->fetchAll();
     }
 
-    public static function FindByOrderId($id)
+    public static function updateOrderStatus($id, $status)
     {
-        $rows = self::findById($id);
-
-        if (!empty($rows)) {
-            return $rows;
-        } else {
-            return null;
-        }
-    }
-
-    public function deleteOrderById($id)
-    {
-        $this->db->delete('orders', ['id' => $id]);
-    }
-
-    public function updateOrderById($id, $newData)
-    {
-        $this->db->update('orders', $newData, ['id' => $id]);
-    }
-
-
-
-    public static function findByEmail($email)
-    {
-        return Core::get()->db->select(static::$tableName, '*', ['email' => $email]);
+        Core::get()->db->update(self::$tableName, ['status' => $status], ['id' => $id]);
     }
 }

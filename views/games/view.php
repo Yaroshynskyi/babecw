@@ -21,11 +21,41 @@
                     <h1 class="display-5 fw-bold text-dark mb-4"><?= htmlspecialchars($game['title']) ?></h1>
                     
                     <h2 class="text-success fw-bold mb-4"><?= number_format($game['price'], 2, '.', ' ') ?> ₴</h2>
+                    <form method="post" action="/boardgames/cart/add">
+                        <input type="hidden" name="game_id" value="<?= $game['id'] ?>">
+                        <button type="submit" class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fs-4 py-3">
+                            <i class="bi bi-cart-plus me-2"></i>Додати в кошик
+                        </button>
+                    </form>
                     
                     <ul class="list-group list-group-flush mb-4 fs-5">
                         <li class="list-group-item bg-transparent px-0 border-bottom">
                             <i class="bi bi-people-fill text-primary me-2"></i><strong>Кількість гравців:</strong> <?= $game['min_players'] ?> - <?= $game['max_players'] ?>
                         </li>
+                        
+                        <?php if (!empty($game['playtime'])): ?>
+                        <li class="list-group-item bg-transparent px-0 border-bottom">
+                            <i class="bi bi-clock-fill text-warning me-2"></i><strong>Час партії:</strong> <?= htmlspecialchars($game['playtime']) ?>
+                        </li>
+                        <?php endif; ?>
+                        
+                        <?php if (!empty($game['age'])): ?>
+                        <li class="list-group-item bg-transparent px-0 border-bottom">
+                            <i class="bi bi-person-badge text-success me-2"></i><strong>Вік:</strong> від <?= htmlspecialchars($game['age']) ?> років
+                        </li>
+                        <?php endif; ?>
+                        
+                        <?php if (!empty($game['language'])): ?>
+                        <li class="list-group-item bg-transparent px-0 border-bottom">
+                            <i class="bi bi-translate text-info me-2"></i><strong>Мова:</strong> <?= htmlspecialchars($game['language']) ?>
+                        </li>
+                        <?php endif; ?>
+                        
+                        <?php if (!empty($game['manufacturer'])): ?>
+                        <li class="list-group-item bg-transparent px-0 border-bottom">
+                            <i class="bi bi-building text-secondary me-2"></i><strong>Виробник:</strong> <?= htmlspecialchars($game['manufacturer']) ?>
+                        </li>
+                        <?php endif; ?>
                     </ul>
                     
                     <h5 class="fw-bold mb-3">Опис гри:</h5>
@@ -33,12 +63,6 @@
                         <?= nl2br(htmlspecialchars($game['description'])) ?>
                     </p>
                     
-                    <form method="post" action="/boardgames/cart/add">
-                        <input type="hidden" name="game_id" value="<?= $game['id'] ?>">
-                        <button type="submit" class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fs-4 py-3">
-                            <i class="bi bi-cart-plus me-2"></i>Додати в кошик
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>

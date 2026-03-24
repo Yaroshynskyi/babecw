@@ -49,6 +49,28 @@
                 <input type="number" name="max_players" class="form-control" required value="<?= htmlspecialchars($game['max_players']) ?>">
             </div>
         </div>
+        
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Виробник</label>
+                <input type="text" name="manufacturer" class="form-control" placeholder="Наприклад: Ігромаг" value="<?= htmlspecialchars($game['manufacturer'] ?? '') ?>">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Мова гри</label>
+                <input type="text" name="language" class="form-control" placeholder="Наприклад: Українська" value="<?= htmlspecialchars($game['language'] ?? '') ?>">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Час партії (хв)</label>
+                <input type="text" name="playtime" class="form-control" placeholder="Наприклад: 30-60" value="<?= htmlspecialchars($game['playtime'] ?? '') ?>">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Мінімальний вік</label>
+                <input type="number" name="age" class="form-control" placeholder="Наприклад: 12" value="<?= htmlspecialchars($game['age'] ?? '') ?>">
+            </div>
+        </div>
 
         <div class="mb-3">
             <label class="form-label fw-bold">URL посилання на зображення</label>

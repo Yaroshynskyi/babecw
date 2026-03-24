@@ -1,140 +1,88 @@
 <?php
-
 namespace controllers;
 
-use core\Cart as CoreCart;
 use core\Controller;
-use core\Core;
+use core\Cart;
 use models\Order;
-use models\Cart;
-use models\Users;
-use core\DB;
 
 class OrderController extends Controller
 {
     public function actionCheckout()
     {
-        $cart = CoreCart::getProducts();
+        $cart = Cart::getProducts();
+        
+        // Якщо кошик порожній — повертаємо в каталог
         if (empty($cart)) {
-            $this->redirect('/nuts/index');
+            return $this->redirect('/boardgames/games/index');
         }
 
+        // Якщо форма оформлення була відправлена (натиснули кнопку)
         if ($this->isPost) {
-            $name = $this->post->get('name');
-            $email = $this->post->get('email');
-            $address = $this->post->get('address');
+            // Отримуємо ID користувача, якщо він залогінений
+            $user = \core\Core::get()->session->get('user');
+            $user_id = $user ? $user['id'] : null;
+
+            $name = $this->post->get('customer_name');
             $phone = $this->post->get('phone');
+            $address = $this->post->get('address');
 
-            $orderModel = new Order();
-            $orderId = $orderModel->createOrder($name, $email, $address, $phone, $cart);
+            if (empty($name) || empty($phone) || empty($address)) {
+                $this->addErrorMessage('Будь ласка, заповніть усі поля!');
+            }
 
-            if ($orderId) {
-                CoreCart::clearCart();
-                $this->redirect('/order/success');
-            } else {
-                $this->addErrorMessage('Не вдалося створити замовлення. Спробуйте ще раз.');
+            if (!$this->isErrorMessageExists()) {
+                // 1. Зберігаємо в БД
+                Order::createOrder($user_id, $cart, $name, $phone, $address);
+
+                // 2. Очищаємо кошик
+                Cart::clearCart();
+
+                // 3. Викидаємо зелене флеш-повідомлення
+                \core\Core::get()->session->set('flash_success', '🎉 Ваше замовлення успішно оформлено! Ми зв\'яжемося з вами найближчим часом.');
+
+                // 4. Повертаємо на головну сторінку каталогу
+                return $this->redirect('/boardgames/games/index');
             }
         }
 
-        $this->template->setParam('cart', $cart);
-        return $this->render();
-    }
-
-    public function actionSuccess()
-    {
-        if (!Users::IsUserLogged() || !Users::IsUserAdmin()) {
-            return $this->redirect('/');
-        }
-        return $this->render();
-    }
-
-    public function actionUpdate()
-    {
-        if (!Users::IsUserLogged() || !Users::IsUserAdmin()) {
-            return $this->redirect('/');
-        }
-        if ($this->isPost) {
-            $id = (int)$_POST['id'];
-            $newData = [
-                'name' => $this->post->get('name'),
-                'email' => $this->post->get('email'),
-                'address' => $this->post->get('address'),
-                'phone' => $this->post->get('phone'),
-                'created_at' => $this->post->get('created_at')
-            ];
-
-            $orderModel = new Order();
-            $orderModel->updateOrderById($id, $newData);
-
-            header('Location: /order/index');
-            exit();
-        } else {
-            header('Location: /orders');
-            exit();
-        }
-    }
-
-    public function actionGetOrders()
-    {
-        if (!Users::IsUserLogged() || !Users::IsUserAdmin()) {
-            http_response_code(403);
-            echo json_encode(['error' => 'Access denied']);
-            return;
-        }
-
-        $orders = Order::getAllOrders();
-        echo json_encode($orders);
-    }
-
-    public function actionDelete()
-    {
-        if (!Users::IsUserLogged() || !Users::IsUserAdmin()) {
-            return $this->redirect('/');
-        }
-        if ($this->isPost) {
-            if (!empty($this->post->get('id'))) {
-                $id = intval($this->post->get('id'));
-                $orderModel = new Order();
-                $orderModel->deleteOrderById($id);
-                return $this->render();
-            }
-        } else {
-            $this->redirect('/order/index');
-        }
+        // Якщо це просто перехід на сторінку — показуємо форму
+        $this->template->setParam('total', Cart::getTotal());
+        $result = $this->render();
+        $result['Title'] = 'Оформлення замовлення';
+        return $result;
     }
 
     public function actionIndex()
     {
-        if (!Users::IsUserLogged() || !Users::IsUserAdmin()) {
-            return $this->redirect('/');
+        // Сторінка доступна ТІЛЬКИ адміністратору
+        if (!\models\Users::IsUserAdmin()) {
+            return $this->redirect('/boardgames/');
         }
-        $this->addRows(Order::getAllOrders());
-        return $this->render();
+
+        $orders = Order::getAllOrders();
+        $this->template->setParam('orders', $orders);
+
+        $result = $this->render();
+        $result['Title'] = 'Управління замовленнями';
+        return $result;
     }
 
-    public function actionShoworder()
+    public function actionChangestatus()
     {
-        if (!Users::IsUserLogged() || !Users::IsUserAdmin()) {
-            return $this->redirect('/');
+        if (!\models\Users::IsUserAdmin()) {
+            return $this->redirect('/boardgames/');
         }
-        $orderId = '';
-        if ($this->isPost) {
-            $orderId = $this->post->get('order_id');
-            $orderId = intval($orderId);
-        }
-        $this->addRows(Order::FindByOrderId($orderId));
-        return $this->render();
-    }
 
-    public function actionFormtoupdate()
-    {
-        if (!Users::IsUserLogged() || !Users::IsUserAdmin()) {
-            return $this->redirect('/');
-        }
         if ($this->isPost) {
-            return $this->render();
-        } else {
-            $this->redirect('order/index');
+            $order_id = $this->post->get('order_id');
+            $status = $this->post->get('status');
+            
+            if (!empty($order_id) && !empty($status)) {
+                Order::updateOrderStatus($order_id, $status);
+                \core\Core::get()->session->set('flash_success', 'Статус замовлення #' . $order_id . ' успішно оновлено!');
+            }
         }
+        
+        return $this->redirect('/boardgames/order/index');
     }
 }

@@ -50,6 +50,28 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Виробник</label>
+                <input type="text" name="manufacturer" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Мова гри</label>
+                <input type="text" name="language" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Час партії (хв)</label>
+                <input type="text" name="playtime" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Мінімальний вік</label>
+                <input type="number" name="age" class="form-control" required>
+            </div>
+        </div>
+
         <div class="mb-3">
             <label class="form-label fw-bold">URL посилання на зображення</label>
             <input type="text" name="image" class="form-control" placeholder="https://...">

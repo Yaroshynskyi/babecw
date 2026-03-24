@@ -328,44 +328,29 @@ if (empty($Content)) {
                     <li class="nav-item"><a href="/boardgames/" class="nav-link"><i class="bi bi-house-door me-1"></i>Головна</a></li>
                     <li class="nav-item"><a href="/boardgames/games/index" class="nav-link"><i class="bi bi-basket me-1"></i>Каталог ігор</a></li>
                     <li class="nav-item"><a href="/boardgames/cart/index" class="nav-link"><i class="bi bi-cart3 me-1"></i>Кошик</a></li>
-                    
-                    <?php if (Users::IsUserLogged()) : ?>
-                        <?php if (Users::IsUserAdmin()) : ?>
-                            <li class="nav-item"><a href="/boardgames/order/index" class="nav-link"><i class="bi bi-clipboard-check me-1"></i>Замовлення</a></li>
-                        <?php endif; ?>
-                        <li class="nav-item"><a href="/boardgames/users/logout" class="nav-link"><i class="bi bi-box-arrow-right me-1"></i>Вийти</a></li>
-                    <?php else : ?>
-                        <li class="nav-item"><a href="/boardgames/users/login" class="nav-link"><i class="bi bi-box-arrow-in-right me-1"></i>Увійти</a></li>
-                        <li class="nav-item"><a href="/boardgames/users/register" class="nav-link"><i class="bi bi-person-plus me-1"></i>Зареєструватись</a></li>
-                    <?php endif; ?>
                 </ul>
-
-                <?php if (Users::IsUserLogged()) : ?>
+                <?php if (\models\Users::IsUserLogged()) : ?>
                     <div class="dropdown text-end">
                         <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Користувач" width="40" height="40" class="rounded-circle user-avatar">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="Користувач" width="40" height="40" class="rounded-circle user-avatar">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="/users/profile"><i class="bi bi-person-circle me-2"></i>Профіль</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <?php if (Users::isUserAdmin()) : ?>
+                            <li><a class="dropdown-item" href="/boardgames/users/profile"><i class="bi bi-person-circle me-2"></i>Профіль</a></li>
+                            <?php if (\models\Users::isUserAdmin()) : ?>
+                                 <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/boardgames/order/index"><i class="bi bi-clipboard-check me-1"></i>Упр. замовленнями</a></li>
                                 <li><a class="dropdown-item" href="/boardgames/games/add"><i class="bi bi-plus-circle me-2"></i>Додати нову гру</a></li>
                             <?php endif; ?>
-                            <li><a class="dropdown-item" href="/users/logout"><i class="bi bi-box-arrow-right me-2"></i>Вийти</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/boardgames/users/logout"><i class="bi bi-box-arrow-right me-2"></i>Вийти</a></li>
                         </ul>
                     </div>
+                <?php else : ?>
+                    <div class="text-end">
+                        <a href="/boardgames/users/login" class="btn btn-outline-light me-2">Увійти</a>
+                        <a href="/boardgames/users/register" class="btn btn-warning">Зареєструватися</a>
+                    </div>
                 <?php endif; ?>
-
-                <div class="ms-4 position-relative">
-                    <a href="/nuts/cart" class="d-block link-light text-decoration-none cart-icon">
-                        <i class="bi bi-basket2-fill" style="font-size: 1.8rem;"></i>
-                        <?php
-                        $cartItemsCount = count(Cart::getProducts());
-                        if ($cartItemsCount > 0) : ?>
-                            <span class="badge rounded-pill cart-badge"><?= $cartItemsCount ?></span>
-                        <?php endif; ?>
-                    </a>
-                </div>
             </div>
         </nav>
 

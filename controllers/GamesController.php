@@ -9,17 +9,35 @@ class GamesController extends Controller
 {
     public function actionIndex()
     {
-        $games = Games::getGames();
-        
+        // 1. Збираємо параметри фільтру з URL (якщо вони є)
+        $filters = [
+            'category_id' => $this->get->get('category_id'),
+            'min_price' => $this->get->get('min_price'),
+            'max_price' => $this->get->get('max_price'),
+            'manufacturer' => $this->get->get('manufacturer'),
+            'language' => $this->get->get('language'),
+            'age' => $this->get->get('age')
+        ];
+
+        // 2. Отримуємо ігри з урахуванням фільтрів
+        $games = \models\Games::filterGames($filters);
+
+        // 3. Отримуємо дані для випадаючих списків у формі фільтру
+        $categories = \models\Categories::getAllCategories();
+        $manufacturers = \models\Games::getUniqueValues('manufacturer');
+        $languages = \models\Games::getUniqueValues('language');
+
+        // 4. Передаємо все це у файл дизайну
         $this->template->setParam('games', $games);
-        // Додаємо цей рядок, щоб передати заголовок у файл дизайну:
-        $this->template->setParam('title', 'Каталог настільних ігор'); 
+        $this->template->setParam('categories', $categories);
+        $this->template->setParam('manufacturers', $manufacturers);
+        $this->template->setParam('languages', $languages);
+        $this->template->setParam('current_filters', $filters); // Щоб зберегти вибір у формі
         
         $result = $this->render();
         $result['Title'] = 'Каталог настільних ігор';
         
         return $result;
-        
     }
 
     public function actionAdd()
@@ -34,6 +52,10 @@ class GamesController extends Controller
             $description = $this->post->get('description');
             $image = $this->post->get('image');
             $category_id = $this->post->get('category_id');
+            $manufacturer = $this->post->get('manufacturer');
+            $language = $this->post->get('language');
+            $playtime = $this->post->get('playtime');
+            $age = $this->post->get('age');
 
             if (empty($title)) $this->addErrorMessage('Назва не вказана');
             if (!is_numeric($price) || $price < 0) $this->addErrorMessage('Некоректна ціна');
@@ -42,15 +64,12 @@ class GamesController extends Controller
             if (empty($category_id)) $this->addErrorMessage('Категорію не обрано');
 
             if (!$this->isErrorMessageExists()) {
-                \models\Games::addGame($title, $description, $price, $min_players, $max_players, $image, $category_id);
-                
-                // ЗАПИСУЄМО FLASH-ПОВІДОМЛЕННЯ В СЕСІЮ
+                \models\Games::addGame($title, $description, $price, $min_players, $max_players, $image, $category_id, $manufacturer, $language, $playtime, $age);
                 \core\Core::get()->session->set('flash_success', 'Гру успішно додано до каталогу!');
                 return $this->redirect("/boardgames/games/index"); 
             }
         }
         
-        // Передаємо список категорій з БД у форму
         $this->template->setParam('categories', \models\Categories::getAllCategories());
         
         $result = $this->render();
@@ -84,7 +103,7 @@ class GamesController extends Controller
 
         $game = \models\Games::getGameById($game_id);
 
-        if ($this->isPost && !empty($this->post->get('title'))) {
+         if ($this->isPost && !empty($this->post->get('title'))) {
             $newData = [
                 'title' => $this->post->get('title'),
                 'price' => $this->post->get('price'),
@@ -92,13 +111,16 @@ class GamesController extends Controller
                 'max_players' => $this->post->get('max_players'),
                 'description' => $this->post->get('description'),
                 'image' => $this->post->get('image'),
-                'category_id' => $this->post->get('category_id')
+                'category_id' => $this->post->get('category_id'),
+                'manufacturer' => $this->post->get('manufacturer'),
+                'language' => $this->post->get('language'),
+                'playtime' => $this->post->get('playtime'),
+                'age' => $this->post->get('age')
             ];
             
             $gameModel = new \models\Games();
             $gameModel->updateGameById($game_id, $newData);
             
-            // ЗАПИСУЄМО FLASH-ПОВІДОМЛЕННЯ
             \core\Core::get()->session->set('flash_success', 'Зміни успішно збережено!');
             return $this->redirect('/boardgames/games/index');
         }
