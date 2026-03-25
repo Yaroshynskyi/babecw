@@ -14,11 +14,10 @@ class Games extends Model
         if (!empty($rows)) {
             return $rows;
         } else {
-            return []; // Повертаємо порожній масив, щоб не ламався foreach у дизайні
+            return [];
         }
     }
 
-    // Метод для динамічної фільтрації
     public static function filterGames($filters = [])
     {
         $sql = "SELECT * FROM " . self::$tableName . " WHERE 1=1";
@@ -58,10 +57,8 @@ class Games extends Model
 
     public static function getUniqueValues($column)
     {
-        // Вибираємо тільки ті значення, які існують (не порожні)
         $sql = "SELECT DISTINCT $column FROM " . self::$tableName . " WHERE $column IS NOT NULL AND $column != ''";
         
-        // ТУТ БУЛА ПОМИЛКА: додано ->pdo-> перед query()
         $stmt = \core\Core::get()->db->pdo->query($sql);
         
         return $stmt->fetchAll(\PDO::FETCH_COLUMN);
@@ -85,7 +82,6 @@ class Games extends Model
             $params[':category_id'] = $category_id;
         }
 
-        // Адаптований фільтр: шукаємо ігри, де кількість гравців підходить
         if (!empty($players)) {
             $conditions[] = "min_players <= :players AND max_players >= :players";
             $params[':players'] = $players;

@@ -84,14 +84,13 @@
 
 <style>
     :root {
-        --game-primary: #2C3E50; /* Глибокий синій */
-        --game-accent: #E74C3C;  /* Яскравий червоний */
+        --game-primary: #2C3E50; 
+        --game-accent: #E74C3C;  
         --game-accent-hover: #C0392B;
         --game-light: #ECF0F1;
         --game-dark: #2C3E50;
         --game-bg: #F8F9FA;
-        /* Додаємо новий колір для геймерського градієнту */
-        --game-info: #3498DB; /* Яскравий синій */
+        --game-info: #3498DB;
     }
 
     body {
@@ -144,14 +143,11 @@
         z-index: 2;
     }
 
-    /* ОНОВЛЕНИЙ КЛАС ДЛЯ ГРАДІЄНТУ НАПИСУ */
     .gamer-highlight {
-        /* Ефектний градієнт від червоного до синього */
         background: linear-gradient(45deg, #E74C3C, #3498DB);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 900;
-        /* Невелике світіння для ефекту */
         text-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
     }
 

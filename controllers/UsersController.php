@@ -1,7 +1,6 @@
 <?php
 
 namespace controllers;
-
 use core\Controller;
 use core\Core;
 use models\Users;
@@ -61,27 +60,19 @@ class UsersController extends Controller
         if (!Users::IsUserLogged() || !Users::IsUserAdmin()) {
             return $this->redirect('/boardgames/users/login');
         }
-        // $this->addRows(Order::getAllOrders()); <-- Тимчасово прибрали
         return $this->render();
     }
 
   public function actionProfile()
     {
-        // Якщо не залогінений - викидаємо на форму входу
         if (!Users::IsUserLogged()) {
             return $this->redirect('/boardgames/users/login');
         }
 
-        // Дістаємо дані поточного користувача
         $user = Core::get()->session->get('user');
-        
-        // Витягуємо всі його замовлення
         $orders = Order::getOrdersByUserId($user['id']);
-
-        // Передаємо у файл дизайну
         $this->template->setParam('user', $user);
         $this->template->setParam('orders', $orders);
-
         $result = $this->render();
         $result['Title'] = 'Особистий кабінет';
         return $result;
@@ -91,13 +82,12 @@ class UsersController extends Controller
     {
         if (!Users::IsUserLogged()) return $this->redirect('/boardgames/users/login');
 
-        // Отримуємо поточні дані юзера з сесії
         $user = \core\Core::get()->session->get('user');
 
         if ($this->isPost) {
             $firstName = $this->post->get('firstname');
             $lastName = $this->post->get('lastname');
-            $password = $this->post->get('password'); // Новий пароль (якщо ввели)
+            $password = $this->post->get('password'); 
 
             if (empty($firstName) || empty($lastName)) {
                 $this->addErrorMessage('Ім\'я та прізвище є обов\'язковими');
@@ -109,15 +99,12 @@ class UsersController extends Controller
                     'lastName' => $lastName
                 ];
 
-                // Оновлюємо пароль тільки якщо поле не порожнє
                 if (!empty($password)) {
                     $newData['password'] = $password;
                 }
 
-                // Зберігаємо в базу
                 Users::updateUserById($user['id'], $newData);
 
-                // Оновлюємо дані в поточній сесії, щоб зміни відобразилися миттєво
                 $user['firstName'] = $firstName;
                 $user['lastName'] = $lastName;
                 if (!empty($password)) $user['password'] = $password;

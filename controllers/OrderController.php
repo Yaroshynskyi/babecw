@@ -11,14 +11,11 @@ class OrderController extends Controller
     {
         $cart = Cart::getProducts();
         
-        // Якщо кошик порожній — повертаємо в каталог
         if (empty($cart)) {
             return $this->redirect('/boardgames/games/index');
         }
 
-        // Якщо форма оформлення була відправлена (натиснули кнопку)
         if ($this->isPost) {
-            // Отримуємо ID користувача, якщо він залогінений
             $user = \core\Core::get()->session->get('user');
             $user_id = $user ? $user['id'] : null;
 
@@ -31,21 +28,16 @@ class OrderController extends Controller
             }
 
             if (!$this->isErrorMessageExists()) {
-                // 1. Зберігаємо в БД
                 Order::createOrder($user_id, $cart, $name, $phone, $address);
 
-                // 2. Очищаємо кошик
                 Cart::clearCart();
 
-                // 3. Викидаємо зелене флеш-повідомлення
                 \core\Core::get()->session->set('flash_success', '🎉 Ваше замовлення успішно оформлено! Ми зв\'яжемося з вами найближчим часом.');
 
-                // 4. Повертаємо на головну сторінку каталогу
                 return $this->redirect('/boardgames/games/index');
             }
         }
 
-        // Якщо це просто перехід на сторінку — показуємо форму
         $this->template->setParam('total', Cart::getTotal());
         $result = $this->render();
         $result['Title'] = 'Оформлення замовлення';
@@ -54,7 +46,6 @@ class OrderController extends Controller
 
     public function actionIndex()
     {
-        // Сторінка доступна ТІЛЬКИ адміністратору
         if (!\models\Users::IsUserAdmin()) {
             return $this->redirect('/boardgames/');
         }

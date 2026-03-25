@@ -68,7 +68,6 @@
 </div>
 
 <style>
-    /* Анімація карток при наведенні */
     .service-card {
         transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
@@ -77,8 +76,6 @@
         box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
         border-color: #E74C3C !important;
     }
-    
-    /* Анімація іконки всередині картки */
     .service-card .icon-wrapper {
         transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     }

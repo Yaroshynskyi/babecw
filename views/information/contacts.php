@@ -88,12 +88,11 @@
 </div>
 
 <style>
-    /* Невеличка анімація для карток */
     .contact-card {
         transition: transform 0.3s ease, border-color 0.3s ease;
     }
     .contact-card:hover {
         transform: translateY(-5px);
-        border-color: #E74C3C !important; /* Колір --game-accent */
+        border-color: #E74C3C !important; 
     }
 </style>

@@ -7,7 +7,6 @@ use models\Games;
 
 class CartController extends Controller
 {
-    // Додавання товару в кошик
     public function actionAdd()
     {
         if ($this->isPost) {
@@ -19,11 +18,9 @@ class CartController extends Controller
                 \core\Core::get()->session->set('flash_success', 'Гру "' . $game['title'] . '" успішно додано до кошика!');
             }
         }
-        // Повертаємо користувача в каталог, щоб він міг продовжити покупки
         return $this->redirect('/boardgames/games/index');
     }
 
-    // Сторінка перегляду кошика
     public function actionIndex()
     {
         $this->template->setParam('cart', Cart::getProducts());
@@ -34,7 +31,6 @@ class CartController extends Controller
         return $result;
     }
 
-    // Видалення одного товару
     public function actionRemove()
     {
         if ($this->isPost) {
@@ -45,7 +41,6 @@ class CartController extends Controller
         return $this->redirect('/boardgames/cart/index');
     }
 
-    // Очищення всього кошика
     public function actionClear()
     {
         Cart::clearCart();

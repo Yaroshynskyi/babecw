@@ -26,8 +26,8 @@ if (empty($Content)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
-            --game-primary: #2C3E50; /* Глибокий синій */
-            --game-accent: #E74C3C;  /* Яскравий червоний */
+            --game-primary: #2C3E50;
+            --game-accent: #E74C3C;
             --game-accent-hover: #C0392B;
             --game-light: #ECF0F1;
             --game-dark: #1a252f;
@@ -48,7 +48,6 @@ if (empty($Content)) {
             flex: 1;
         }
 
-        /* Оновлена шапка сайту */
         .navbar {
             background: linear-gradient(to right, var(--game-dark), var(--game-primary));
             padding: 1rem 0;
@@ -157,7 +156,6 @@ if (empty($Content)) {
             margin-bottom: 2rem;
         }
         
-        /* Оновлений футер */
         footer {
             background: var(--game-dark);
             color: var(--game-light);

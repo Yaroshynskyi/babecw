@@ -9,7 +9,6 @@ class GamesController extends Controller
 {
     public function actionIndex()
     {
-        // 1. Збираємо параметри фільтру з URL (якщо вони є)
         $filters = [
             'category_id' => $this->get->get('category_id'),
             'min_price' => $this->get->get('min_price'),
@@ -19,21 +18,17 @@ class GamesController extends Controller
             'age' => $this->get->get('age')
         ];
 
-        // 2. Отримуємо ігри з урахуванням фільтрів
         $games = \models\Games::filterGames($filters);
 
-        // 3. Отримуємо дані для випадаючих списків у формі фільтру
         $categories = \models\Categories::getAllCategories();
         $manufacturers = \models\Games::getUniqueValues('manufacturer');
         $languages = \models\Games::getUniqueValues('language');
 
-        // 4. Передаємо все це у файл дизайну
         $this->template->setParam('games', $games);
         $this->template->setParam('categories', $categories);
         $this->template->setParam('manufacturers', $manufacturers);
         $this->template->setParam('languages', $languages);
-        $this->template->setParam('current_filters', $filters); // Щоб зберегти вибір у формі
-        
+        $this->template->setParam('current_filters', $filters); 
         $result = $this->render();
         $result['Title'] = 'Каталог настільних ігор';
         
@@ -87,7 +82,6 @@ class GamesController extends Controller
                 $gameModel = new \models\Games();
                 $gameModel->deleteGameById($game_id);
                 
-                // ЗАПИСУЄМО FLASH-ПОВІДОМЛЕННЯ
                 \core\Core::get()->session->set('flash_success', 'Гру успішно видалено з бази.');
             }
         }
@@ -126,7 +120,6 @@ class GamesController extends Controller
         }
 
         $this->template->setParam('game', $game);
-        // Передаємо список категорій з БД у форму
         $this->template->setParam('categories', \models\Categories::getAllCategories());
         
         $result = $this->render();
@@ -136,28 +129,22 @@ class GamesController extends Controller
 
     public function actionView()
     {
-        // 1. Отримуємо ID гри з URL (наприклад, ?id=5)
         $id = $this->get->get('id');
         
-        // Якщо ID немає або він порожній — повертаємо в каталог
         if (empty($id)) {
             return $this->redirect('/boardgames/games/index');
         }
 
-        // 2. Шукаємо гру в базі даних за цим ID
         $game = \models\Games::getGameById($id);
         
-        // Якщо такої гри не існує — теж повертаємо в каталог
         if (empty($game)) {
             \core\Core::get()->session->set('flash_error', 'Гру не знайдено!');
             return $this->redirect('/boardgames/games/index');
         }
 
-        // 3. Передаємо дані гри у файл дизайну
         $this->template->setParam('game', $game);
         
         $result = $this->render();
-        // Встановлюємо назву гри як заголовок сторінки
         $result['Title'] = $game['title'];
         return $result;
     }
