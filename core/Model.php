@@ -2,8 +2,6 @@
 
 namespace core;
 
-use models\News;
-
 class Model
 {
     protected $db;

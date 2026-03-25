@@ -5,7 +5,7 @@
     <div class="card shadow-sm" style="border-radius: 15px; overflow: hidden; border: none;">
         <div class="row g-0">
             <div class="col-md-5 bg-light d-flex align-items-center justify-content-center" style="min-height: 400px;">
-                <img src="<?= !empty($game['image']) ? htmlspecialchars($game['image']) : '/assets/images/default-game.jpg' ?>" 
+                <img src="<?= !empty($game['image']) ? htmlspecialchars($game['image']) : '/boardgames/assets/images/default-game.jpg' ?>" 
                      class="img-fluid" 
                      alt="<?= htmlspecialchars($game['title']) ?>"
                      style="max-height: 500px; object-fit: contain; padding: 20px;">

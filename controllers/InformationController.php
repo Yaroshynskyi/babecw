@@ -5,8 +5,6 @@ namespace controllers;
 use core\Controller;
 use core\Core;
 use core\Template;
-use models\News;
-use models\Users;
 
 class InformationController extends Controller
 {

@@ -1,40 +1,40 @@
 <div class="main-container mt-5">
     <section class="intro-section text-center p-5">
-        <h1 class="display-4">Вітаємо у <span class="brand-highlight">NutsDelight</span>!</h1>
-        <p class="lead">Найсмачніші та найкорисніші горішки для вашої родини.</p>
-        <a class="btn btn-nut btn-lg" href="/information/about" role="button">
-            <i class="bi bi-info-circle me-2"></i>Дізнатись про нас
+        <h1 class="display-4">Вітаємо у <span class="gamer-highlight">Світі Настілок</span>!</h1>
+        <p class="lead">Найкращі настільні ігри для незабутніх вечорів з друзями, родиною чи справжніх гік-баталій.</p>
+        <a class="btn btn-game btn-lg" href="/boardgames/games/index" role="button">
+            <i class="bi bi-dice-6-fill me-2"></i>Перейти до каталогу
         </a>
     </section>
 
     <div class="row product-row">
         <div class="col-md-4">
             <div class="product-block">
-                <div class="nut-icon">🥜</div>
-                <h5 class="block-title">Наші Горішки</h5>
-                <p>Преміум якість: волоські, мигдаль, кеш'ю, фундук та екзотичні сорти.</p>
-                <a href="/nuts/index" class="btn btn-nut">
-                    <i class="bi bi-basket me-2"></i>Дивитись асортимент
+                <div class="game-icon">♟️</div>
+                <h5 class="block-title">Стратегії</h5>
+                <p>Складні економічні та військові ігри для тих, хто любить подумати на кілька кроків вперед.</p>
+                <a href="/boardgames/games/index?category_id=1" class="btn btn-game">
+                    <i class="bi bi-search me-2"></i>Шукати стратегії
                 </a>
             </div>
         </div>
         <div class="col-md-4">
             <div class="product-block">
-                <div class="nut-icon">🌟</div>
-                <h5 class="block-title">Спеціальні Пропозиції</h5>
-                <p>Знижки на набори, акційні позиції та подарункові упаковки.</p>
-                <a href="/information/services" class="btn btn-nut">
-                    <i class="bi bi-percent me-2"></i>Акції та знижки
+                <div class="game-icon">🎉</div>
+                <h5 class="block-title">Для вечірок</h5>
+                <p>Швидкі, веселі та галасливі ігри для великих компаній. Мінімум правил, максимум сміху!</p>
+                <a href="/boardgames/games/index?category_id=2" class="btn btn-game">
+                    <i class="bi bi-people-fill me-2"></i>Обрати для паті
                 </a>
             </div>
         </div>
         <div class="col-md-4">
             <div class="product-block">
-                <div class="nut-icon">🎁</div>
-                <h5 class="block-title">Подарункові Набори</h5>
-                <p>Елегантні набори для подарунків на будь-яку нагоду.</p>
-                <a href="/information/services" class="btn btn-nut">
-                    <i class="bi bi-gift me-2"></i>Подарункові набори
+                <div class="game-icon">🧩</div>
+                <h5 class="block-title">Сімейні</h5>
+                <p>Добрі та захоплюючі ігри, в які буде цікаво грати як дітям, так і їхнім батькам.</p>
+                <a href="/boardgames/games/index?category_id=3" class="btn btn-game">
+                    <i class="bi bi-house-heart-fill me-2"></i>Для всієї родини
                 </a>
             </div>
         </div>
@@ -43,55 +43,40 @@
     <div class="info-block mt-5">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h5 class="block-title"><i class="bi bi-geo-alt me-2"></i>Контакти та Доставка</h5>
-                <p>Замовляйте горішки з доставкою по місту або завітайте до нашого магазину. Безкоштовна доставка при замовленні від 500 грн.</p>
-                <a href="/information/contacts" class="btn btn-nut">
-                    <i class="bi bi-telephone me-2"></i>Зв'язатися з нами
+                <h5 class="block-title"><i class="bi bi-box-seam me-2"></i>Швидка доставка по всій Україні</h5>
+                <p>Ми ретельно пакуємо кожну гру, щоб коробка приїхала до вас в ідеальному стані. Відправляємо Новою Поштою щодня, щоб ви могли зіграти вже на найближчих вихідних!</p>
+                <a href="/boardgames/games/index" class="btn btn-game">
+                    <i class="bi bi-cart-plus me-2"></i>Зробити замовлення
                 </a>
             </div>
             <div class="col-md-4 text-center">
-                <div class="delivery-icon">🚚</div>
+                <div class="delivery-icon">📦</div>
             </div>
         </div>
     </div>
 
-    <div class="info-block mt-5">
-        <div class="row align-items-center">
-            <div class="col-md-4 text-center">
-                <div class="about-icon">🌳</div>
-            </div>
-            <div class="col-md-8">
-                <h5 class="block-title"><i class="bi bi-tree me-2"></i>Про нас</h5>
-                <p><strong>NutsDelight</strong> — сімейний бізнес із 15-річним досвідом. Ми обираємо лише найкращі горіхи від перевірених постачальників. Наша місія — приносити здоров'я та задоволення через якісні натуральні продукти.</p>
-                <a href="/information/about" class="btn btn-nut">
-                    <i class="bi bi-book me-2"></i>Читати більше
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="nut-benefits mt-5">
-        <h3 class="text-center mb-4"><i class="bi bi-heart-fill me-2"></i>Чому обирають наші горішки?</h3>
+    <div class="game-benefits mt-5 mb-5">
+        <h3 class="text-center mb-4"><i class="bi bi-star-fill text-warning me-2"></i>Чому обирають нас?</h3>
         <div class="row">
             <div class="col-md-3 text-center">
-                <div class="benefit-icon">✅</div>
-                <h6>100% Натуральні</h6>
-                <small>Без консервантів та добавок</small>
+                <div class="benefit-icon">🏆</div>
+                <h6>Світові хіти</h6>
+                <small>Тільки найкращі ігри з ТОП BGG</small>
             </div>
             <div class="col-md-3 text-center">
-                <div class="benefit-icon">🏆</div>
-                <h6>Преміум Якість</h6>
-                <small>Відбірні калібровані горіхи</small>
+                <div class="benefit-icon">🇺🇦</div>
+                <h6>Українська локалізація</h6>
+                <small>Підтримуємо рідну мову</small>
             </div>
             <div class="col-md-3 text-center">
                 <div class="benefit-icon">⚡</div>
-                <h6>Швидка Доставка</h6>
-                <small>До 24 годин у межах міста</small>
+                <h6>Наявність</h6>
+                <small>Усе, що на сайті — є на складі</small>
             </div>
             <div class="col-md-3 text-center">
-                <div class="benefit-icon">💚</div>
-                <h6>Екологічно</h6>
-                <small>Еко-упаковка та сортування</small>
+                <div class="benefit-icon">🛡️</div>
+                <h6>Гарантія якості</h6>
+                <small>Оригінальні видання ігор</small>
             </div>
         </div>
     </div>
@@ -99,17 +84,19 @@
 
 <style>
     :root {
-        --nut-brown: #8B4513;
-        --nut-light: #D2691E;
-        --nut-gold: #DAA520;
-        --nut-cream: #FFF8DC;
-        --nut-dark: #5D4037;
-        --nut-bg: #f9f3e9;
+        --game-primary: #2C3E50; /* Глибокий синій */
+        --game-accent: #E74C3C;  /* Яскравий червоний */
+        --game-accent-hover: #C0392B;
+        --game-light: #ECF0F1;
+        --game-dark: #2C3E50;
+        --game-bg: #F8F9FA;
+        /* Додаємо новий колір для геймерського градієнту */
+        --game-info: #3498DB; /* Яскравий синій */
     }
 
     body {
-        background: linear-gradient(135deg, var(--nut-bg) 0%, #f5ebd8 100%);
-        color: var(--nut-dark);
+        background: var(--game-bg);
+        color: var(--game-dark);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
@@ -120,51 +107,63 @@
     }
 
     .intro-section {
-        background: linear-gradient(135deg, rgba(255, 248, 220, 0.9) 0%, rgba(255, 253, 245, 0.9) 100%);
-        color: var(--nut-dark);
+        background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+        color: white;
         border-radius: 25px;
         margin-bottom: 4rem;
-        box-shadow: 
-            0 10px 30px rgba(139, 69, 19, 0.1),
-            0 0 0 1px rgba(210, 105, 30, 0.1);
-        border: 1px solid rgba(218, 165, 32, 0.2);
+        box-shadow: 0 10px 30px rgba(44, 62, 80, 0.2);
         position: relative;
         overflow: hidden;
     }
 
     .intro-section::before {
-        content: '';
+        content: '🎲';
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 5px;
-        background: linear-gradient(90deg, var(--nut-light), var(--nut-gold), var(--nut-light));
+        top: -20px;
+        left: 20px;
+        font-size: 8rem;
+        opacity: 0.1;
+        transform: rotate(-15deg);
+    }
+
+    .intro-section::after {
+        content: '🃏';
+        position: absolute;
+        bottom: -20px;
+        right: 20px;
+        font-size: 8rem;
+        opacity: 0.1;
+        transform: rotate(15deg);
     }
 
     .intro-section h1 {
-        color: var(--nut-brown);
+        color: white;
         font-weight: 800;
         margin-bottom: 1.5rem;
-        text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.1);
+        position: relative;
+        z-index: 2;
     }
 
-    .brand-highlight {
-        color: var(--nut-light);
-        font-style: italic;
-        background: linear-gradient(45deg, var(--nut-light), var(--nut-gold));
+    /* ОНОВЛЕНИЙ КЛАС ДЛЯ ГРАДІЄНТУ НАПИСУ */
+    .gamer-highlight {
+        /* Ефектний градієнт від червоного до синього */
+        background: linear-gradient(45deg, #E74C3C, #3498DB);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 900;
+        /* Невелике світіння для ефекту */
+        text-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
     }
 
     .intro-section .lead {
-        color: var(--nut-light);
+        color: var(--game-light);
         font-size: 1.4rem;
         margin-bottom: 2.5rem;
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
+        position: relative;
+        z-index: 2;
     }
 
     .product-row {
@@ -174,61 +173,39 @@
         gap: 2rem;
     }
 
-    @media (max-width: 768px) {
-        .product-row {
-            flex-direction: column;
-            gap: 2rem;
-        }
-    }
-
     .product-block {
-        background: linear-gradient(145deg, #ffffff, #faf6ed);
+        background: white;
         padding: 2.5rem 2rem;
         border-radius: 20px;
-        box-shadow: 
-            0 8px 25px rgba(139, 69, 19, 0.1),
-            0 0 0 1px rgba(210, 105, 30, 0.1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
         text-align: center;
         width: 100%;
         transition: all 0.4s ease;
-        border: 1px solid rgba(218, 165, 32, 0.2);
-        position: relative;
-        overflow: hidden;
+        border: 1px solid rgba(44, 62, 80, 0.1);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .product-block:hover {
         transform: translateY(-10px);
-        box-shadow: 
-            0 15px 35px rgba(139, 69, 19, 0.2),
-            0 0 0 2px rgba(218, 165, 32, 0.3);
+        box-shadow: 0 15px 35px rgba(44, 62, 80, 0.15);
+        border-color: var(--game-accent);
     }
 
-    .nut-icon {
+    .game-icon {
         font-size: 3.5rem;
         margin-bottom: 1.5rem;
         display: inline-block;
-        animation: float 3s ease-in-out infinite;
+        transition: transform 0.3s ease;
     }
 
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-    }
-
-    .product-block:nth-child(1) .nut-icon {
-        animation-delay: 0s;
-    }
-
-    .product-block:nth-child(2) .nut-icon {
-        animation-delay: 0.5s;
-    }
-
-    .product-block:nth-child(3) .nut-icon {
-        animation-delay: 1s;
+    .product-block:hover .game-icon {
+        transform: scale(1.2) rotate(5deg);
     }
 
     .block-title {
-        color: var(--nut-brown);
+        color: var(--game-primary);
         font-size: 1.8rem;
         margin-bottom: 1.5rem;
         font-weight: 700;
@@ -244,121 +221,88 @@
         transform: translateX(-50%);
         width: 60px;
         height: 3px;
-        background: linear-gradient(90deg, var(--nut-light), var(--nut-gold));
+        background: var(--game-accent);
         border-radius: 2px;
     }
 
     .product-block p {
-        color: var(--nut-light);
+        color: #7f8c8d;
         font-size: 1.1rem;
         line-height: 1.6;
         margin-bottom: 2rem;
-        min-height: 80px;
+        flex-grow: 1;
     }
 
     .info-block {
-        background: linear-gradient(145deg, #ffffff, #faf6ed);
+        background: white;
         padding: 3rem;
         border-radius: 25px;
         margin-bottom: 4rem;
-        box-shadow: 
-            0 8px 25px rgba(139, 69, 19, 0.1),
-            0 0 0 1px rgba(210, 105, 30, 0.1);
-        border: 1px solid rgba(218, 165, 32, 0.2);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(44, 62, 80, 0.1);
         transition: all 0.4s ease;
     }
 
     .info-block:hover {
-        box-shadow: 
-            0 12px 30px rgba(139, 69, 19, 0.15),
-            0 0 0 2px rgba(218, 165, 32, 0.25);
+        box-shadow: 0 12px 30px rgba(44, 62, 80, 0.1);
     }
 
-    .delivery-icon, .about-icon {
-        font-size: 5rem;
-        opacity: 0.8;
-        filter: drop-shadow(2px 2px 4px rgba(139, 69, 19, 0.2));
+    .delivery-icon {
+        font-size: 6rem;
+        animation: float 3s ease-in-out infinite;
     }
 
-    .btn-nut {
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    .btn-game {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         padding: 14px 32px;
-        background: linear-gradient(45deg, var(--nut-light), var(--nut-brown));
+        background: var(--game-accent);
         color: #ffffff;
         text-decoration: none;
         border-radius: 30px;
         font-size: 1.1rem;
         font-weight: 600;
-        transition: all 0.4s ease;
-        box-shadow: 
-            0 6px 20px rgba(139, 69, 19, 0.2),
-            0 0 0 3px rgba(255, 248, 220, 0.8);
+        transition: all 0.3s ease;
         border: none;
-        position: relative;
-        overflow: hidden;
     }
 
-    .btn-nut::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.6s ease;
-    }
-
-    .btn-nut:hover {
-        background: linear-gradient(45deg, var(--nut-brown), var(--nut-dark));
+    .btn-game:hover {
+        background: var(--game-accent-hover);
         color: #ffffff;
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 
-            0 10px 25px rgba(139, 69, 19, 0.3),
-            0 0 0 3px rgba(218, 165, 32, 0.9);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
     }
 
-    .btn-nut:hover::before {
-        left: 100%;
-    }
-
-    .btn-nut.btn-lg {
-        padding: 18px 45px;
-        font-size: 1.3rem;
-    }
-
-    .btn-nut i {
-        font-size: 1.2rem;
-    }
-
-    .nut-benefits {
-        background: linear-gradient(145deg, #ffffff, #faf6ed);
+    .game-benefits {
+        background: white;
         padding: 3rem;
         border-radius: 25px;
-        box-shadow: 
-            0 8px 25px rgba(139, 69, 19, 0.1),
-            0 0 0 1px rgba(210, 105, 30, 0.1);
-        border: 1px solid rgba(218, 165, 32, 0.2);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(44, 62, 80, 0.1);
     }
 
-    .nut-benefits h3 {
-        color: var(--nut-brown);
+    .game-benefits h3 {
+        color: var(--game-primary);
         font-weight: 700;
         margin-bottom: 3rem;
     }
 
-    .nut-benefits h6 {
-        color: var(--nut-dark);
-        font-weight: 600;
+    .game-benefits h6 {
+        color: var(--game-dark);
+        font-weight: 700;
         margin-top: 1rem;
         margin-bottom: 0.5rem;
     }
 
-    .nut-benefits small {
-        color: var(--nut-light);
-        font-size: 0.9rem;
+    .game-benefits small {
+        color: #7f8c8d;
+        font-size: 0.95rem;
     }
 
     .benefit-icon {
@@ -373,25 +317,8 @@
     }
 
     @media (max-width: 768px) {
-        .main-container {
-            padding: 1rem;
-        }
-        
-        .intro-section {
-            padding: 2rem 1rem;
-        }
-        
-        .intro-section h1 {
-            font-size: 2.5rem;
-        }
-        
-        .product-block, .info-block {
-            padding: 2rem 1.5rem;
-        }
-        
-        .delivery-icon, .about-icon {
-            font-size: 3.5rem;
-            margin-top: 2rem;
+        .product-row {
+            flex-direction: column;
         }
     }
 </style>

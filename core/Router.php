@@ -42,10 +42,9 @@ class Router
     public function error($code)
     {
         http_response_code($code);
-        //header("Location: /site/error/{$code}");
         switch ($code) {
             case 404:
-                header("Location: /site/error");
+                header("Location: /boardgames/site/error");
                 break;
         }
     }

@@ -79,7 +79,7 @@
                     <?php foreach ($games as $game): ?>
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100 shadow-sm border-0" style="border-radius: 15px; overflow: hidden;">
-                                <img src="<?= !empty($game['image']) ? htmlspecialchars($game['image']) : '/assets/images/default-game.jpg' ?>" class="card-img-top game-img" alt="Game">
+                                <img src="<?= !empty($game['image']) ? htmlspecialchars($game['image']) : '/boardgames/assets/images/default-game.jpg' ?>" class="card-img-top game-img" alt="Game">
                                 
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title fw-bold"><?= htmlspecialchars($game['title']) ?></h5>

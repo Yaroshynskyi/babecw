@@ -1,5 +1,6 @@
 <?php
 /** @var string $error_message */
+/** @var array $categories */
 ?>
 <style>
     .admin-form-container {
@@ -29,12 +30,13 @@
                 <label class="form-label fw-bold">Ціна (грн)</label>
                 <input type="number" step="0.01" name="price" class="form-control" required>
             </div>
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Категорія (ID)</label>
+           <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Категорія</label>
                 <select name="category_id" class="form-select" required>
-                    <option value="1">Стратегії</option>
-                    <option value="2">Для вечірок</option>
-                    <option value="3">Сімейні</option>
+                    <option value="" disabled selected>Оберіть категорію...</option>
+                    <?php foreach ($categories as $cat): ?>
+                        <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['name']) ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
         </div>
