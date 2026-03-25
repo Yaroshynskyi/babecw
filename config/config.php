@@ -2,5 +2,5 @@
 
 $Config[] =  [
     'title' => 'Приклад написання CMS-системи',
-    'adminEmail' => 'ipz222_bds@student.ztu.edu.ua'
+    'adminEmail' => 'ipz222_yasv@student.ztu.edu.ua'
 ];
